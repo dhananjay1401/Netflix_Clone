@@ -17,90 +17,46 @@ router.post("/", verify, async (req, res) => {
   }
 });
 
-// //UPDATE
+//DELETE
+router.delete("/:id", verify, async (req, res) => {
+  if (req.user.isAdmin) {
+    try {
+      await List.findByIdAndDelete(req.params.id);
+      res.status(200).json("The List has been deleted...");
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  } else {
+    res.status(403).json("You are not allowed!");
+  }
+});
 
-// router.put("/:id", verify, async (req, res) => {
-//     if (req.user.isAdmin) {
-//       try {
-//         const updatedList = await List.findByIdAndUpdate(
-//           req.params.id,
-//           {
-//             $set: req.body,
-//           },
-//           { new: true }
-//         );
-//         res.status(200).json(updatedList);
-//       } catch (err) {
-//         res.status(500).json(err);
-//       }
-//     } else {
-//       res.status(403).json("You are not allowed!");
-//     }
-//   });
-  
-//   //DELETE
-  
-//   router.delete("/:id", verify, async (req, res) => {
-//     if (req.user.isAdmin) {
-//       try {
-//         await List.findByIdAndDelete(req.params.id);
-//         res.status(200).json("The List has been deleted...");
-//       } catch (err) {
-//         res.status(500).json(err);
-//       }
-//     } else {
-//       res.status(403).json("You are not allowed!");
-//     }
-//   });
-  
-//   //GET
-  
-//   router.get("/find/:id", verify, async (req, res) => {
-//     try {
-//       const List = await List.findById(req.params.id);
-//       res.status(200).json(List);
-//     } catch (err) {
-//       res.status(500).json(err);
-//     }
-//   });
-  
-//   //GET RANDOM
-  
-//   router.get("/random", verify, async (req, res) => {
-//     const type = req.query.type;
-//     let List;
-//     try {
-//       if (type === "series") {
-//         List = await List.aggregate([
-//           { $match: { isSeries: true } },
-//           { $sample: { size: 1 } },
-//         ]);
-//       } else {
-//         List = await List.aggregate([
-//           { $match: { isSeries: false } },
-//           { $sample: { size: 1 } },
-//         ]);
-//       }
-//       res.status(200).json(List);
-//     } catch (err) {
-//       res.status(500).json(err);
-//     }
-//   });
-  
-//   //GET ALL
-  
-//   router.get("/", verify, async (req, res) => {
-//     if (req.user.isAdmin) {
-//       try {
-//         const Lists = await List.find();
-//         res.status(200).json(Lists.reverse());
-//       } catch (err) {
-//         res.status(500).json(err);
-//       }
-//     } else {
-//       res.status(403).json("You are not allowed!");
-//     }
-//   });
-  
+//GET ALL
+
+router.get("/", verify, async (req, res) => {
+  const typeQuery = req.query.type;
+  const genreQuery = req.query.genre;
+  let list = [];
+  try {
+    if (typeQuery) {
+      if (genreQuery) {
+        list = await List.aggregate([
+          { $sample: { size: 10 } },
+          { $match: { type: typeQuery, genre: genreQuery } },
+        ]);
+      } else {
+        list = await List.aggregate([
+          { $sample: { size: 10 } },
+          { $match: { type: typeQuery } },
+        ]);
+      }
+    } else {
+      list = await List.aggregate([{ $sample: { size: 10 } }]);
+    }
+    res.status(200).json(list);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 module.exports = router;
