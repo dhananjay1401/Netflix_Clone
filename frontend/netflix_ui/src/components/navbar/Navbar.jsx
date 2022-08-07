@@ -6,6 +6,7 @@ import "./avatar.png"
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import SearchIcon from '@mui/icons-material/Search';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import { Link } from 'react-router-dom';
 export const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     window.onscroll = () =>{
@@ -18,9 +19,14 @@ export const Navbar = () => {
         <div className="container">
         <div className="left">
             <img src='https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg ' alt='' />
+            
             <span>Homepage</span>
+            <Link to="/series">
             <span>Series</span>
+            </Link>
+            <Link to="movies">
             <span>Movies</span>
+            </Link>
             <span>New and Popular</span>
             <span>Mylists</span>
         </div>
