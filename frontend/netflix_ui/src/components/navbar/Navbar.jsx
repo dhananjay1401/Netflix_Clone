@@ -24,7 +24,7 @@ export const Navbar = () => {
             <Link to="/series">
             <span>Series</span>
             </Link>
-            <Link to="movies">
+            <Link to="/movies">
             <span>Movies</span>
             </Link>
             <span>New and Popular</span>
