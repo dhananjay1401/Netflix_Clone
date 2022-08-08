@@ -22,8 +22,8 @@ export const Home = ({ type }) => {
             },
           }
         );
-        console.log(res.data);
-        // setLists(res.data);
+        // console.log(res.data);
+        setLists(res.data);
       } catch (err) {
         console.log(err);
       }
@@ -36,12 +36,18 @@ export const Home = ({ type }) => {
       <div className="home">
         <Navbar />
         <Featured type={type} />
+        {/* {lists.map((list) => (
+        <List list={list} />
+      ))} */}
+        {lists.map((list) => (
+        <List list={list} />
+      ))}
+        {/* <List />
         <List />
         <List />
         <List />
         <List />
-        <List />
-        <List />
+        <List /> */}
 
         {/* <img 
         weidth="100%"
