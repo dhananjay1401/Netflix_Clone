@@ -25,7 +25,7 @@ const ListItem = ({ index, item }) => {
         console.log(err);
       }
     };
-  }, [third]);
+  }, []);
 
   return (
     <div
