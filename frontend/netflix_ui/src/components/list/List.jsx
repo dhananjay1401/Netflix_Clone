@@ -33,7 +33,10 @@ const List = ({list}) => {
             style = {{display: !isMoved && "none"}}
           />
           <div className="container" ref={listRef}>
-          <ListItem index={0} />
+         {list.content.map((item, i) => (
+            <ListItem index={i} item={item} />
+          ))} 
+          {/* <ListItem index={0} />
           <ListItem index={1} />
           <ListItem index={2} />
           <ListItem index={3} />
@@ -42,7 +45,7 @@ const List = ({list}) => {
           <ListItem index={6} />
           <ListItem index={7} />
           <ListItem index={8} />
-          <ListItem index={9} />                                                                  
+          <ListItem index={9} />                                                                   */}
           </div>
           <ArrowForwardIosOutlinedIcon
             className="sliderArrow right"
