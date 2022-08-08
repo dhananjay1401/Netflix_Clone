@@ -1,6 +1,5 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./Home.scss";
-import AcUnitIcon from "@mui/icons-material/AcUnit";
 import { Navbar } from "../../components/navbar/Navbar";
 import Featured from "../../components/featured/Featured";
 import List from "../../components/list/List";
@@ -19,11 +18,11 @@ export const Home = ({ type }) => {
           {
             headers: {
               token:
-              "Bearer "+JSON.parse(localStorage.getItem("user")).accessToken,
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZWQ1YzIzMDA0MWFlZWQyYjI2M2Q5YSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1OTk2NDg0MCwiZXhwIjoxNjYwMzk2ODQwfQ.-5b3suJIHxjPKfTju3blzSo8xwty10-TaZU8uu2eDaE",
             },
           }
         );
-        console.log(res)
+        console.log(res.data);
         // setLists(res.data);
       } catch (err) {
         console.log(err);
