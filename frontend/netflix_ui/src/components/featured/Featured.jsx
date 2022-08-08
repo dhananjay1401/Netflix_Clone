@@ -1,8 +1,29 @@
 import "./Featured.scss";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import React from "react";
+import React, { useState ,useEffect } from "react";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import axios from "axios";
+
 const Featured = ({ type }) => {
+  const [content, setContent] = useState([]);
+  useEffect(() => {
+    const getRandomContent = async () => {
+      try {
+        const res = await axios.get(`/movies/random/?type=${type}` ,
+        {
+          headers: {
+            token:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZWQ1YzIzMDA0MWFlZWQyYjI2M2Q5YSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY1OTk2NDg0MCwiZXhwIjoxNjYwMzk2ODQwfQ.-5b3suJIHxjPKfTju3blzSo8xwty10-TaZU8uu2eDaE",
+          },
+        });
+        setContent(res.data[0]);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getRandomContent();
+  }, [type]);
+
   return (
     <>
       <div className="featured">
@@ -28,22 +49,17 @@ const Featured = ({ type }) => {
           </div>
         )}
         <img
-          src="https://images.pexels.com/photos/6899260/pexels-photo-6899260.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+          src={content.img}
           alt=""
         />
         <div className="info">
           <img
-            src="https://occ-0-1432-1433.1.nflxso.net/dnm/api/v6/LmEnxtiAuzezXBjYXPuDgfZ4zZQ/AAAABUZdeG1DrMstq-YKHZ-dA-cx2uQN_YbCYx7RABDk0y7F8ZK6nzgCz4bp5qJVgMizPbVpIvXrd4xMBQAuNe0xmuW2WjoeGMDn1cFO.webp?r=df1"
+            src={content.img}
             alt=""
           />
 
           <span className="desc">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo ea
-            expedita aperiam quas beatae odio aspernatur. Numquam magni sint
-            iste eos aspernatur rerum deleniti mollitia saepe nihil aperiam illo
-            voluptatum cum accusantium qui, consequatur illum quam nisi
-            repudiandae, aliquam laboriosam at quod quae? Explicabo voluptatem
-            dolore, excepturi error sit saepe?
+            {content.desc}
           </span>
 
           <div className="buttons">

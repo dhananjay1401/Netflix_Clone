@@ -1,14 +1,18 @@
 import React from "react";
 import "./watch.scss";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
+import { Link } from "react-router-dom";
 export const Watch = () => {
+  
   return (
     <>
       <div className="watch">
+        <Link to="/">
         <div className="back">
           <ArrowBackOutlinedIcon />
           Home
         </div>
+        </Link>
         <video
           className="video"
           autoPlay
