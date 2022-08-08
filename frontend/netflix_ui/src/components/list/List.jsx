@@ -4,7 +4,7 @@ import ArrowBackIosOutlinedIcon from "@mui/icons-material/ArrowBackIosOutlined";
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
 import ListItem from "../listItem/ListItem";
 import { useState } from "react";
-const List = ({list}) => {
+const List = ({ list }) => {
   const [slideNumber, setSlideNumber] = useState(0);
   const [isMoved, setIsMoved] = useState(false);
   const listRef = useRef();
@@ -30,22 +30,12 @@ const List = ({list}) => {
           <ArrowBackIosOutlinedIcon
             className="sliderArrow left"
             onClick={() => handleClick("left")}
-            style = {{display: !isMoved && "none"}}
+            style={{ display: !isMoved && "none" }}
           />
           <div className="container" ref={listRef}>
-         {list.content.map((item, i) => (
-            <ListItem index={i} item={item} />
-          ))} 
-          {/* <ListItem index={0} />
-          <ListItem index={1} />
-          <ListItem index={2} />
-          <ListItem index={3} />
-          <ListItem index={4} />
-          <ListItem index={5} />
-          <ListItem index={6} />
-          <ListItem index={7} />
-          <ListItem index={8} />
-          <ListItem index={9} />                                                                   */}
+            {list.content.map((item, i) => (
+              <ListItem index={i} item={item} />
+            ))}
           </div>
           <ArrowForwardIosOutlinedIcon
             className="sliderArrow right"
