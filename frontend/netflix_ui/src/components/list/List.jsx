@@ -18,8 +18,7 @@ const List = ({ list }) => {
     if (direction === "right" && slideNumber < 5) {
       setSlideNumber(slideNumber + 1);
       listRef.current.style.transform = `translateX(${-230 + distance}px)`;
-    }
-
+    } 
     console.log(distance);
   };
   return (
