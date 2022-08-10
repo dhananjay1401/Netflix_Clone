@@ -1,9 +1,7 @@
-import React from "react";
-import { useContext } from "react";
-import { useState } from "react";
-import { login } from "../../Context/authContext/apiCalls";
-import { AuthContext } from "../../Context/authContext/AuthContext";
-import "./Login.css";
+import React, { useContext, useState } from "react";
+import {login} from "../../Context/authContext/apiCalls";
+import  {AuthContext}  from "../../Context/authContext/AuthContext";
+import "./login.css";
 
 export default function Login() {
   const [email, setEmail] = useState("");

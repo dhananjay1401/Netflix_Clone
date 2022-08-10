@@ -9,13 +9,13 @@ const INITIAL_STATE = {
 
 export const AuthContext = createContext(INITIAL_STATE);
 
-
-useEffect(() => {
-  localStorage.setItem("user", JSON.stringify(state.user));
-}, [state.user]);
-
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
+
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(state.user));
+  }, [state.user]);
+
   return (
     <AuthContext.Provider
       value={{

@@ -16,23 +16,29 @@ import "./app.css";
 
 // Router
 import { BrowserRouter as Router } from "react-router-dom";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "./Context/authContext/AuthContext";
 
 function App() {
+
+  const {user} = useContext(AuthContext)
   return (
     <>
-      <Router>
-        <Routes>
-          
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </Router>
-      {/* <Router className="App">
+    <Router>
+      <Routes>
+      <Route path="/login" element={user ? <Login /> : <Navigate to="/" replace />} />
+      </Routes>
+    </Router>
+      {user &&
+      <Router className="App">
         <header className="App-header"></header>
         <Topbar />
         <div className="container">
           <Sidebar />
           <Routes>
+               {/* <Route path="/login" element={user ? <Login /> : <Navigate to="/" replace />} /> */}
+
             <Route exact path="/" element={<Home />} />
             <Route exact path="/users" element={<UsersList />} />
             <Route exact path="/user" element={<User />} />
@@ -42,7 +48,8 @@ function App() {
             <Route exactpath="/newproduct" element={<NewProduct />} />
           </Routes>
         </div>
-      </Router> */}
+      </Router>
+      }
     </>
   );
 }
