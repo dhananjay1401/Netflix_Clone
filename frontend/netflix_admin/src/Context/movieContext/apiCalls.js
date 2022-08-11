@@ -40,7 +40,7 @@ export const createMovie = async (movie, dispatch) => {
   }
 };
 
-//deleteiiiiiiiiiiiiiiiii
+//delete
 export const deleteMovie = async (id, dispatch) => {
   dispatch(deleteMovieStart());
   try {
