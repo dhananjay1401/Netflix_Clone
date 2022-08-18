@@ -37,7 +37,7 @@ router.delete("/:id", verify, async (req, res) => {
     } catch (err) {
       res.status(500).json(err);
     }
-  } else {
+  } else  {
     res.status(403).json("You can update only your account!");
   }
 });
